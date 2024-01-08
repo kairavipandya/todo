@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Task</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Edit Task</h1>
+    <form action="/update/<%= task.id %>" method="POST">
+      <input
+        type="text"
+        name="description"
+        value="<%= task.description %>"
+        required
+      />
+      <input type="text" name="category" value="<%= task.category %>" />
+      <input type="date" name="due_date" value="<%= task.due_date %>" />
+      <button type="submit">Update Task</button>
+    </form>
+  </body>
+</html>

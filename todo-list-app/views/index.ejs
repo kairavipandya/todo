@@ -1,4 +1,3 @@
-<!--inex.ejs-->
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,13 +10,57 @@
     <!-- Task input form -->
     <form action="/add" method="POST">
       <input type="text" name="task" placeholder="Add a new task" required />
+      <input type="text" name="category" placeholder="Category" />
+      <input type="date" name="due_date" />
       <button type="submit">Add Task</button>
     </form>
+
+    <form action="/mark-complete" method="POST">
+      <button type="submit">Mark Completed</button>
+      <ul>
+        <% tasks.forEach(task => { %>
+        <li>
+          <input type="checkbox" name="completedTasks" value="<%= task.id %>" />
+          <strong><%= task.description %></strong><br />
+          Category: <%= task.category %><br />
+          Due Date: <%= task.due_date %><br />
+          <button type="button" onclick="editTask(<%= task.id %>)">Edit</button>
+        </li>
+        <% }) %>
+      </ul>
+    </form>
+
+    <form action="/delete" method="POST">
+      <button type="submit">Delete Selected Tasks</button>
+      <ul>
+        <% tasks.forEach(task => { %>
+        <li>
+          <input type="checkbox" name="deletedTasks" value="<%= task.id %>" />
+          <strong><%= task.description %></strong><br />
+          Category: <%= task.category %><br />
+          Due Date: <%= task.due_date %><br />
+          <button type="button" onclick="editTask(<%= task.id %>)">Edit</button>
+        </li>
+        <% }) %>
+      </ul>
+    </form>
+
+    <!-- JavaScript function for editing tasks -->
+    <script>
+      function editTask(taskId) {
+        window.location = `/edit/${taskId}`;
+      }
+    </script>
 
     <!-- Task list -->
     <ul>
       <% tasks.forEach(task => { %>
-      <li><%= task.description %></li>
+      <li>
+        <input type="checkbox" name="completed" value="<%= task.id %>" />
+        <strong><%= task.description %></strong><br />
+        Category: <%= task.category %><br />
+        Due Date: <%= task.due_date %><br />
+      </li>
       <% }) %>
     </ul>
   </body>
