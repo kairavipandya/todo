@@ -1,0 +1,24 @@
+<!--inex.ejs-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do List App</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css" />
+  </head>
+  <body>
+    <h1>To-Do List</h1>
+
+    <!-- Task input form -->
+    <form action="/add" method="POST">
+      <input type="text" name="task" placeholder="Add a new task" required />
+      <button type="submit">Add Task</button>
+    </form>
+
+    <!-- Task list -->
+    <ul>
+      <% tasks.forEach(task => { %>
+      <li><%= task.description %></li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
