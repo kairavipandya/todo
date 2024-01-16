@@ -1,92 +1,102 @@
-/* styles.css */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-/* Reset some default styles */
+/* Reset styles */
 body,
-h1 {
+h1,
+input,
+button,
+div {
   margin: 0;
   padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 
+/* Body styling */
 body {
-  font-family: "Arial", sans-serif;
-  background-color: #f0f0f0;
+  background-color: #e7cda9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
+/* Header styling */
 h1 {
   color: #333;
-  text-align: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-form {
-  text-align: center;
-  margin: 20px auto;
-  max-width: 400px;
+/* Task form styling */
+.task-form {
+  background-color: #ac1735; /* Theme background color */
   padding: 20px;
-  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-input[type="text"],
-input[type="date"] {
-  width: 100%;
+/* Input fields styling */
+.task-form input[type="text"],
+.task-form input[type="date"] {
+  width: 95%;
   padding: 10px;
-  margin: 5px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 16px;
 }
 
-button[type="submit"] {
-  background-color: #333;
+/* Button styling */
+.task-form button {
+  background-color: transparent;
   color: #fff;
-  border: none;
+  border: 2px solid #fff;
   padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-button[type="submit"] .fas {
-  margin-right: 5px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-  max-width: 400px;
-  margin: 20px auto;
-}
-
-li {
-  margin: 10px 0;
+/* Button hover effect */
+.task-form button:hover {
   background-color: #fff;
+  color: #ac1735;
+}
+
+/* Task list styling */
+.task-list {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+/* Individual task item styling */
+.task-item {
+  background-color: #fff;
+  margin-bottom: 10px;
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-li.completed {
-  background-color: #e0e0e0;
-  text-decoration: line-through;
-}
-
-li input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-button[type="button"] {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-button[type="button"] .fas {
-  margin-right: 5px;
+/* Task details styling */
+.task-details {
+  flex-grow: 1;
+  margin-left: 10px;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .task-form,
+  .task-list {
+    max-width: 90%;
+  }
+}
+
+/* Additional styling as needed */

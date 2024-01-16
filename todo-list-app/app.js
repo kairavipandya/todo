@@ -32,13 +32,16 @@ app.get('/', (req, res) => {
 });
 
 app.post('/add', (req, res) => {
-    const { task, category, due_date } = req.body;
-    const sql = 'INSERT INTO tasks (description, category, due_date) VALUES (?, ?, ?)';
-    db.query(sql, [task, category, due_date], (err, result) => {
-      if (err) throw err;
-      res.redirect('/');
-    });
+  const { task, category, due_date, repeat, repeat_days } = req.body;
+  let repeatInfo = repeat === 'custom' ? repeat_days.join(',') : repeat;
+  
+  const sql = 'INSERT INTO tasks (description, category, due_date, repeat_days) VALUES (?, ?, ?, ?)';
+  db.query(sql, [task, category, due_date, repeatInfo], (err, result) => {
+    if (err) throw err;
+    res.redirect('/');
   });
+});
+
   
 
 // Start the server

@@ -8,42 +8,52 @@
     <h1>To-Do List</h1>
 
     <!-- Task input form -->
-    <form action="/add" method="POST">
+    <form action="/add" method="POST" class="task-form">
       <input type="text" name="task" placeholder="Add a new task" required />
       <input type="text" name="category" placeholder="Category" />
       <input type="date" name="due_date" />
+      <label for="repeat">Repeat:</label>
+      <select name="repeat" id="repeatSelect">
+        <option value="none">None</option>
+        <option value="daily">Daily</option>
+        <option value="custom">Custom</option>
+      </select>
+      <div id="customRepeatOptions" style="display: none">
+        <label
+          ><input type="checkbox" name="repeat_days" value="Monday" />
+          Monday</label
+        >
+        <label
+          ><input type="checkbox" name="repeat_days" value="Tuesday" />
+          Tuesday</label
+        >
+        <!-- ...repeat for other days... -->
+      </div>
       <button type="submit">Add Task</button>
     </form>
+    <script>
+      document
+        .getElementById("repeatSelect")
+        .addEventListener("change", function () {
+          document.getElementById("customRepeatOptions").style.display =
+            this.value === "custom" ? "block" : "none";
+        });
+    </script>
 
-    <form action="/mark-complete" method="POST">
-      <button type="submit">Mark Completed</button>
-      <ul>
-        <% tasks.forEach(task => { %>
-        <li>
-          <input type="checkbox" name="completedTasks" value="<%= task.id %>" />
+    <!-- Task list with actions -->
+    <div class="task-list">
+      <% tasks.forEach(task => { %>
+      <div class="task-item">
+        <input type="checkbox" name="completedTasks" value="<%= task.id %>" />
+        <div class="task-details">
           <strong><%= task.description %></strong><br />
           Category: <%= task.category %><br />
           Due Date: <%= task.due_date %><br />
-          <button type="button" onclick="editTask(<%= task.id %>)">Edit</button>
-        </li>
-        <% }) %>
-      </ul>
-    </form>
-
-    <form action="/delete" method="POST">
-      <button type="submit">Delete Selected Tasks</button>
-      <ul>
-        <% tasks.forEach(task => { %>
-        <li>
-          <input type="checkbox" name="deletedTasks" value="<%= task.id %>" />
-          <strong><%= task.description %></strong><br />
-          Category: <%= task.category %><br />
-          Due Date: <%= task.due_date %><br />
-          <button type="button" onclick="editTask(<%= task.id %>)">Edit</button>
-        </li>
-        <% }) %>
-      </ul>
-    </form>
+        </div>
+        <button type="button" onclick="editTask(<%= task.id %>)">Edit</button>
+      </div>
+      <% }) %>
+    </div>
 
     <!-- JavaScript function for editing tasks -->
     <script>
@@ -51,17 +61,5 @@
         window.location = `/edit/${taskId}`;
       }
     </script>
-
-    <!-- Task list -->
-    <ul>
-      <% tasks.forEach(task => { %>
-      <li>
-        <input type="checkbox" name="completed" value="<%= task.id %>" />
-        <strong><%= task.description %></strong><br />
-        Category: <%= task.category %><br />
-        Due Date: <%= task.due_date %><br />
-      </li>
-      <% }) %>
-    </ul>
   </body>
 </html>
